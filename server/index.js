@@ -1,55 +1,28 @@
 const puppeteer = require('puppeteer');
 const dateFormat = require('dateformat');
 const path = require('path');
-const fs = require('fs');
-const axios = require('axios');
+const {profileSelectors, reasonsSelectors, submitSelector} = require("./config");
 
-const profileSelectors = {
-    firstname: '#field-firstname',
-    lastname: '#field-lastname',
-    birthday: '#field-birthday',
-    placeofbirth: '#field-placeofbirth',
-    address: '#field-address',
-    city: '#field-city',
-    zipcode: '#field-zipcode',
-    date: '#field-datesortie',
-    heuresortie: '#field-heuresortie'
-};
+const now = new Date()
 
-const reasonsSelectors = {
-    enfant: '#checkbox-enfants',
-    travail: '#checkbox-travail',
-    achats: '#checkbox-achats',
-    sante: '#checkbox-sante',
-    famille: '#checkbox-famille',
-    handicap: '#checkbox-handicap',
-    sportAnimaux: '#checkbox-sport_animaux',
-    convocation: '#checkbox-convocation',
-    mission: '#checkbox-missions',
-}
+generateAttestation({
+    firstname: 'Honoré',
+    lastname: 'Tomaka',
+    birthday: '26/02/1981',
+    placeofbirth: 'Roubaix',
+    address: '44, rue Gustave Scrive',
+    city: 'La Madeleine',
+    zipcode: '59110',
+    date: dateFormat(now, 'dd/mm/yyyy'),
+    heuresortie: dateFormat(now, 'hh:MMTT')
+});
 
-const submitSelector = '#generate-btn';
-
-(async () => {
+async function generateAttestation(formData) {
     try {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto('https://media.interieur.gouv.fr/deplacement-covid-19/');
         console.log('page loaded');
-
-        const now = new Date();
-        const formData = {
-            firstname: 'Honoré',
-            lastname: 'Tomaka',
-            birthday: '26/02/1981',
-            placeofbirth: 'Roubaix',
-            address: '44, rue Gustave Scrive',
-            city: 'La Madeleine',
-            zipcode: '59110',
-            date: dateFormat(now, 'dd/mm/yyyy'),
-            heuresortie: dateFormat(now, 'hh:MMTT')
-        }
-
         console.log('fill form');
         await page.type(profileSelectors.firstname, formData.firstname);
         await page.type(profileSelectors.lastname, formData.lastname);
@@ -76,4 +49,4 @@ const submitSelector = '#generate-btn';
     } catch (e) {
         console.error(e);
     }
-})();
+}
