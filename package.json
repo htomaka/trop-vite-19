@@ -2,7 +2,7 @@
   "name": "tropVite19",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx parcel src/index.html",
@@ -14,5 +14,10 @@
   "license": "ISC",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "dateformat": "^3.0.3",
+    "puppeteer": "^5.4.1"
   }
 }
