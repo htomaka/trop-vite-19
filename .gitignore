@@ -1,0 +1,5 @@
+/src/AUTH
+/dist/
+/node_modules/
+.idea
+.cache
