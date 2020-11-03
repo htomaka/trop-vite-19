@@ -7,13 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx parcel src/index.html",
     "build": "rm -rf dist && npx parcel build src/index.html",
-    "deploy": "npm run build && cd dist && surge"
+    "deploy": "npm run build && cd dist && surge",
+    "format": "npx prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "prettier": "2.1.2"
   },
   "dependencies": {
     "axios": "^0.21.0",

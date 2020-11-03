@@ -1,0 +1,6 @@
+/src/AUTH
+/dist/
+/node_modules/
+.idea
+.cache
+/server/downloads/
