@@ -1,3 +1,4 @@
+const dateFormat = require("dateformat");
 const { generateAttestation } = require("./generate-attestation");
 
 const now = new Date();

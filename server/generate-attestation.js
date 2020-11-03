@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-const dateFormat = require("dateformat");
 const path = require("path");
 const {
   profileSelectors,
