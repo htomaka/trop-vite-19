@@ -17,7 +17,7 @@ function readDir(path) {
 
 function cleanDir(dir) {
   return new Promise((resolve, reject) => {
-    fs.readdir(dir, (err, files) => {
+    fs.readdir(dir, (err, files = []) => {
       if (err) {
         reject(err);
       }
