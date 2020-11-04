@@ -1,18 +1,33 @@
 {
-  "name": "tropVite19",
+  "name": "trop-vite-19",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx parcel src/index.html",
     "build": "rm -rf dist && npx parcel build src/index.html",
-    "deploy": "npm run build && cd dist && surge"
+    "deploy": "npm run build && cd dist && surge",
+    "format": "npx prettier --write .",
+    "start:server": "node server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "prettier": "2.1.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "file-saver": "^2.0.2",
+    "joi": "^17.3.0",
+    "nodemon": "^2.0.6",
+    "puppeteer": "^5.4.1",
+    "rimraf": "^3.0.2"
   }
 }
