@@ -1,16 +1,16 @@
-const dateFormat = require("dateformat");
-const { generateAttestation } = require("./generate-attestation");
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const { generateAttestationCtrl } = require("./generate-attestation-ctrl");
 
-const now = new Date();
+const app = express();
+const port = process.env.PORT || 3000;
 
-generateAttestation({
-  firstname: "Honoré",
-  lastname: "Tomaka",
-  birthday: "26/02/1981",
-  placeofbirth: "Roubaix",
-  address: "44, rue Gustave Scrive",
-  city: "La Madeleine",
-  zipcode: "59110",
-  date: dateFormat(now, "dd/mm/yyyy"),
-  heuresortie: dateFormat(now, "hh:MMTT"),
+app.use(cors());
+app.use(bodyParser.json());
+
+app.post("/generate", generateAttestationCtrl);
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });

@@ -6,7 +6,7 @@ const {
   submitSelector,
 } = require("./config");
 
-async function generateAttestation(formData) {
+async function generateAttestationService(formData) {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -24,10 +24,12 @@ async function generateAttestation(formData) {
     await page.type(profileSelectors.heuresortie, formData.heuresortie);
     await (await page.$(reasonsSelectors.sportAnimaux)).click();
 
+    await page.screenshot({ path: "example.png", fullPage: true });
+
     const client = await page.target().createCDPSession();
     await client.send("Page.setDownloadBehavior", {
       behavior: "allow",
-      downloadPath: path.resolve(__dirname, "./downloads"),
+      downloadPath: path.resolve(__dirname, "downloads"),
     });
     console.log("submit form");
     await (await page.$(submitSelector)).click();
@@ -35,12 +37,12 @@ async function generateAttestation(formData) {
     await page.waitFor(5000);
     console.log("download success");
     console.log("close page");
-    await browser.close();
+    return browser.close();
   } catch (e) {
     console.error(e);
   }
 }
 
 module.exports = {
-  generateAttestation,
+  generateAttestation: generateAttestationService,
 };
