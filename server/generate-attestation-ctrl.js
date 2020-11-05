@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs").promises;
 const schema = require("./schema");
 const AttestationGeneratorService = require("./attestation-generator-service");
 const config = require("./config");
@@ -12,7 +13,7 @@ module.exports = {
     }
 
     try {
-      await cleanDir(config.tmpFolder);
+      await fs.mkdir(config.tmpFolder);
       await service.exec(req.body);
       const files = await readDir(config.tmpFolder);
       if (files.length) {
@@ -20,6 +21,7 @@ module.exports = {
           path.join(config.tmpFolder, files[files.length - 1])
         );
       }
+      await fs.rmdir(config.tmpFolder, { recursive: true });
     } catch (err) {
       res.status(500).end(JSON.stringify(err));
     }
