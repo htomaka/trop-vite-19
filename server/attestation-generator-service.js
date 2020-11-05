@@ -18,7 +18,7 @@ class AttestationGeneratorService {
 
   async _init() {
     console.log("launch browser");
-    this.browser = await puppeteer.launch();
+    this.browser = await puppeteer.launch({ args: ["--no-sandbox"] });
     this.page = await this.browser.newPage();
     console.log("open page");
     await this.page.goto(this.config.pageUrl);
