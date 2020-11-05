@@ -1,9 +1,9 @@
 const puppeteer = require("puppeteer");
-const path = require("path");
 const {
   profileSelectors,
   reasonsSelectors,
   submitSelector,
+  tmpFolder,
 } = require("./config");
 
 async function generateAttestationService(formData) {
@@ -27,7 +27,7 @@ async function generateAttestationService(formData) {
     const client = await page.target().createCDPSession();
     await client.send("Page.setDownloadBehavior", {
       behavior: "allow",
-      downloadPath: path.join(__dirname, "tmp"),
+      downloadPath: tmpFolder,
     });
     console.log("submit form");
     await (await page.$(submitSelector)).click();
