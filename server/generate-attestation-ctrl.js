@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs").promises;
 const schema = require("./schema");
 const AttestationGeneratorService = require("./attestation-generator-service");
-const config = require("./config");
+const config = require("../config");
 const { readDir, cleanDir } = require("./utils");
 const service = new AttestationGeneratorService(config);
 
