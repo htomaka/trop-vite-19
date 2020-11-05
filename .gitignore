@@ -3,5 +3,5 @@
 /node_modules/
 .idea
 .cache
-/server/downloads/*.pdf
+/server/tmp/*.pdf
 example.png
