@@ -6,10 +6,14 @@ class AttestationGeneratorService {
   }
 
   async exec(formData) {
-    await this._init();
-    await this._prepareDownload();
-    await this._submitForm(formData);
-    await this._afterExec();
+    try {
+      await this._init();
+      await this._prepareDownload();
+      await this._submitForm(formData);
+      await this._afterExec();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async _init() {
