@@ -24,12 +24,10 @@ async function generateAttestationService(formData) {
     await page.type(profileSelectors.heuresortie, formData.heuresortie);
     await (await page.$(reasonsSelectors.sportAnimaux)).click();
 
-    await page.screenshot({ path: "example.png", fullPage: true });
-
     const client = await page.target().createCDPSession();
     await client.send("Page.setDownloadBehavior", {
       behavior: "allow",
-      downloadPath: path.resolve(__dirname, "downloads"),
+      downloadPath: path.join(__dirname, "tmp"),
     });
     console.log("submit form");
     await (await page.$(submitSelector)).click();

@@ -1,3 +1,5 @@
+const path = require("path");
+
 const profileSelectors = {
   firstname: "#field-firstname",
   lastname: "#field-lastname",
@@ -24,8 +26,11 @@ const reasonsSelectors = {
 
 const submitSelector = "#generate-btn";
 
+const tmpFolder = path.join(__dirname, "tmp");
+
 module.exports = {
   profileSelectors,
   reasonsSelectors,
   submitSelector,
+  tmpFolder,
 };

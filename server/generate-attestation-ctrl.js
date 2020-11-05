@@ -1,75 +1,43 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 const schema = require("./schema");
+const { tmpFolder } = require("./config");
 const { generateAttestation } = require("./generate-attestation-service");
 
-function readDir(path) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(path, (err, files) => {
-      if (!err) {
-        resolve(files);
-      } else {
-        reject(err);
-      }
-    });
-  });
+async function readDir(path) {
+  try {
+    return await fs.readdir(path);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-function cleanDir(dir) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(dir, (err, files = []) => {
-      if (err) {
-        reject(err);
-      }
-      files.forEach((file, i) => {
-        fs.unlink(path.join(dir, file), (err) => {
-          if (err) {
-            reject(err);
-          }
-
-          if (i === files.length - 1) {
-            resolve();
-          }
-        });
-      });
-    });
-  });
+async function cleanDir(dir) {
+  try {
+    const files = await fs.readdir(dir);
+    return files.forEach(
+      async (file, i) => await fs.unlink(path.join(dir, file))
+    );
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 module.exports = {
-  generateAttestationCtrl(req, res) {
+  async generateAttestationCtrl(req, res) {
     if (!schema.valid(req.body)) {
       res.status(500).end("Invalid input");
     }
 
-    cleanDir(path.join(__dirname, "downloads"))
-      .then(() => {
-        return generateAttestation(req.body);
-      })
-      .then(() => {
-        console.log("read dir");
-        return readDir(path.join(__dirname, "downloads"));
-      })
-      .then((files) => {
-        if (!files.length) {
-          res.status(500).end("download failed");
-        }
-        console.log("attempt to download");
-        res.download(
-          path.join(__dirname, "downloads", files[files.length - 1]),
-          (err, _) => {
-            if (!err) {
-              res.status(200).end();
-              console.log("download success");
-            } else {
-              res.status(500).end(JSON.stringify(err));
-              console.error("download failed");
-            }
-          }
-        );
-      })
-      .catch((err) => {
-        res.status(500).end(JSON.stringify(err));
-      });
+    try {
+      await cleanDir(tmpFolder);
+      await generateAttestation(req.body);
+      const files = await readDir(tmpFolder);
+      if (files.length) {
+        await res.download(path.join(tmpFolder, files[files.length - 1]));
+      }
+    } catch (err) {
+      res.status(500).end(JSON.stringify(err));
+    }
   },
 };
