@@ -1,27 +1,9 @@
-const fs = require("fs").promises;
 const path = require("path");
 const schema = require("./schema");
-const { tmpFolder } = require("./config");
-const { generateAttestation } = require("./generate-attestation-service");
-
-async function readDir(path) {
-  try {
-    return await fs.readdir(path);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function cleanDir(dir) {
-  try {
-    const files = await fs.readdir(dir);
-    return files.forEach(
-      async (file, i) => await fs.unlink(path.join(dir, file))
-    );
-  } catch (err) {
-    console.error(err);
-  }
-}
+const AttestationGeneratorService = require("./attestation-generator-service");
+const config = require("./config");
+const { readDir, cleanDir } = require("./utils");
+const service = new AttestationGeneratorService(config);
 
 module.exports = {
   async generateAttestationCtrl(req, res) {
@@ -30,11 +12,13 @@ module.exports = {
     }
 
     try {
-      await cleanDir(tmpFolder);
-      await generateAttestation(req.body);
-      const files = await readDir(tmpFolder);
+      await cleanDir(config.tmpFolder);
+      await service.exec(req.body);
+      const files = await readDir(config.tmpFolder);
       if (files.length) {
-        await res.download(path.join(tmpFolder, files[files.length - 1]));
+        await res.download(
+          path.join(config.tmpFolder, files[files.length - 1])
+        );
       }
     } catch (err) {
       res.status(500).end(JSON.stringify(err));
