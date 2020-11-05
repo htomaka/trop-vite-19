@@ -9,7 +9,7 @@
     "build:ui": "rm -rf dist && npx parcel build src/index.html",
     "deploy": "npm run build && cd dist && surge",
     "format": "npx prettier --write .",
-    "start": "node ."
+    "start": "node server"
   },
   "keywords": [],
   "author": "",
