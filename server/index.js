@@ -1,9 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const {
-  generateAttestationCtrl,
-} = require("./server/generate-attestation-ctrl");
+const { generateAttestationCtrl } = require("./generate-attestation-ctrl");
 
 const app = express();
 const port = process.env.PORT || 3000;

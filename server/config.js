@@ -25,7 +25,7 @@ const reasonsSelectors = {
 };
 
 const submitSelector = "#generate-btn";
-const tmpFolder = path.join(__dirname, "tmp");
+const tmpFolder = path.join(__dirname, "../server/tmp");
 const pageUrl = "https://media.interieur.gouv.fr/deplacement-covid-19/";
 
 module.exports = {
