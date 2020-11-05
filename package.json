@@ -2,14 +2,14 @@
   "name": "trop-vite-19",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:ui": "npx parcel src/index.html",
     "build:ui": "rm -rf dist && npx parcel build src/index.html",
     "deploy": "npm run build && cd dist && surge",
     "format": "npx prettier --write .",
-    "start": "node server"
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
