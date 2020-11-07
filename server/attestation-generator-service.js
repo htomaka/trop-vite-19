@@ -72,7 +72,7 @@ class AttestationGeneratorService extends EventEmitter {
     console.log("submit form");
     await (await this.page.$(this.config.submitSelector)).click();
     console.log("downloading...");
-    return this.page.waitFor(1000);
+    return this.page.waitFor(5000);
   }
 
   async _prepareDownload() {
