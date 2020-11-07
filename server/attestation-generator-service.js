@@ -1,7 +1,9 @@
 const puppeteer = require("puppeteer");
+const EventEmitter = require('events');
 
-class AttestationGeneratorService {
+class AttestationGeneratorService extends EventEmitter {
   constructor(config) {
+    super();
     this.config = config;
   }
 
@@ -12,7 +14,7 @@ class AttestationGeneratorService {
       await this._submitForm(formData);
       await this._afterExec();
     } catch (err) {
-      console.error(err);
+      this.emit('generatorService::error', err);
     }
   }
 
@@ -22,15 +24,18 @@ class AttestationGeneratorService {
     this.page = await this.browser.newPage();
     console.log("open page");
     await this.page.goto(this.config.pageUrl);
+    this.emit('generatorService::init');
+
   }
 
   async _afterExec() {
     console.log("exit");
+    this.emit('generatorService::afterExec');
     await this.browser.close();
   }
 
   async _submitForm(formData) {
-    console.log("fill form");
+    console.log("fill form", formData);
     await this.page.type(
       this.config.profileSelectors.firstname,
       formData.firstname
@@ -62,12 +67,12 @@ class AttestationGeneratorService {
       formData.heuresortie
     );
     await (
-      await this.page.$(this.config.reasonsSelectors.sportAnimaux)
+      await this.page.$(this.config.reasonsSelectors[formData.leaveReason])
     ).click();
     console.log("submit form");
     await (await this.page.$(this.config.submitSelector)).click();
     console.log("downloading...");
-    return this.page.waitFor(5000);
+    return this.page.waitFor(1000);
   }
 
   async _prepareDownload() {
@@ -75,7 +80,7 @@ class AttestationGeneratorService {
     const client = await this.page.target().createCDPSession();
     return client.send("Page.setDownloadBehavior", {
       behavior: "allow",
-      downloadPath: this.config.tmpFolder,
+      downloadPath: this.config.tmpFolder
     });
   }
 }

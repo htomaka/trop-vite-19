@@ -1,13 +1,16 @@
 const Joi = require("joi");
 
+const requiredString = Joi.string().required();
+
 module.exports = Joi.object({
-  firstname: Joi.string().required(),
-  lastname: Joi.string().required(),
-  birthday: Joi.string().required(),
-  placeofbirth: Joi.string().required(),
-  address: Joi.string().required(),
-  city: Joi.string().required(),
-  zipcode: Joi.string().required(),
-  date: Joi.string().required(),
-  heuresortie: Joi.string().required(),
+  firstname: requiredString,
+  lastname: requiredString,
+  birthday: requiredString,
+  placeofbirth: requiredString,
+  address: requiredString,
+  city: requiredString,
+  zipcode: requiredString,
+  date: requiredString,
+  heuresortie: requiredString,
+  leaveReason: Joi.boolean().required()
 });

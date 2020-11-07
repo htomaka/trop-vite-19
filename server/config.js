@@ -13,7 +13,7 @@ const profileSelectors = {
 };
 
 const reasonsSelectors = {
-  enfant: "#checkbox-enfants",
+  enfants: "#checkbox-enfants",
   travail: "#checkbox-travail",
   achats: "#checkbox-achats",
   sante: "#checkbox-sante",

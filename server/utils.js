@@ -1,5 +1,4 @@
 const fs = require("fs").promises;
-const path = require("path");
 
 async function readDir(path) {
   try {
@@ -9,16 +8,16 @@ async function readDir(path) {
   }
 }
 
-async function cleanDir(dir) {
-  try {
-    const files = await fs.readdir(dir);
-    return files.forEach(async (file) => await fs.unlink(path.join(dir, file)));
-  } catch (err) {
-    console.error(err);
-  }
+async function rmDir(path, options){
+  return await fs.rmdir(path, options);
+}
+
+async function mkDir(path, options){
+  return await fs.mkdir(path);
 }
 
 module.exports = {
   readDir,
-  cleanDir,
+  rmDir,
+  mkDir
 };
