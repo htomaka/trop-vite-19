@@ -6,12 +6,12 @@ import dateFormat from 'dateformat';
 import GenericEventHandler = JSXInternal.GenericEventHandler;
 
 
-const Form = (props: {leaveReasons: LeaveReason[], onSelect: GenericEventHandler<HTMLInputElement>}) => {
+const Form = ({ leaveReasons, onSelect }: { leaveReasons: LeaveReason[], onSelect: GenericEventHandler<HTMLInputElement> }) => {
   return <form>
-    {props.leaveReasons.map((value, index) => {
+    {leaveReasons.map((value, index) => {
       return <div className="form-group">
         <label>
-          <input type="radio" value={value} onChange={(event) => props.onSelect(event.currentTarget.value)} name="leavereason"/>
+          <input type="radio" value={value} onChange={(event) => onSelect(event.currentTarget.value)} name="leavereason"/>
           {value}
         </label>
       </div>;
@@ -34,7 +34,6 @@ class App extends Component<any, any> {
   ];
 
   handleSelectReason(reason: LeaveReason){
-    console.log(reason);
     this.setState({
       selectedReason: reason
     })
