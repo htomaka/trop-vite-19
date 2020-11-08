@@ -1,37 +1,12 @@
 import { Component, h, render } from "preact";
 import { GenerateAttestationService } from "./generate-attestation-service";
 import { LeaveReason } from "./types";
-import { JSXInternal } from "preact/src/jsx";
 import dateFormat from 'dateformat';
-import GenericEventHandler = JSXInternal.GenericEventHandler;
-
-
-const Form = ({ leaveReasons, onSelect }: { leaveReasons: LeaveReason[], onSelect: GenericEventHandler<HTMLInputElement> }) => {
-  return <form>
-    {leaveReasons.map((value, index) => {
-      return <div className="form-group">
-        <label>
-          <input type="radio" value={value} onChange={(event) => onSelect(event.currentTarget.value)} name="leavereason"/>
-          {value}
-        </label>
-      </div>;
-    })}
-  </form>;
-};
+import { Form } from "./components/form";
+import { leaveReasons } from "./config";
 
 class App extends Component<any, any> {
   private generateService = new GenerateAttestationService();
-  private leaveReasons: LeaveReason[] = [
-    "enfants",
-    "travail",
-    "achats",
-    "sante",
-    "famille",
-    "handicap",
-    "sportAnimaux",
-    "convocation",
-    "mission"
-  ];
 
   handleSelectReason(reason: LeaveReason){
     this.setState({
@@ -56,10 +31,12 @@ class App extends Component<any, any> {
   }
 
   render() {
-    return <div>
-      <Form leaveReasons={this.leaveReasons} onSelect={this.handleSelectReason.bind(this)}/>
-      <button onClick={() => this.handleGenerate()}>Generate Attestation</button>
-    </div>;
+    return <section class={"container"}>
+      <h1>TropVite19</h1>
+      <h2>Indiquez une raison de sortie</h2>
+      <Form leaveReasons={leaveReasons} onSelect={this.handleSelectReason.bind(this)}/>
+      <button className="button" onClick={() => this.handleGenerate()}>Generate Attestation</button>
+    </section>;
   }
 
 }
