@@ -32,10 +32,12 @@ class App extends Component<any, any> {
 
   render() {
     return <section class={"container"}>
-      <h1>TropVite19</h1>
-      <h2>Indiquez une raison de sortie</h2>
+      <header className="form-header">
+        <h1 className="title">TropVite19</h1>
+        <h2 className="sub-title">Indiquez une raison de sortie</h2>
+      </header>
       <Form leaveReasons={leaveReasons} onSelect={this.handleSelectReason.bind(this)}/>
-      <button className="button" onClick={() => this.handleGenerate()}>Generate Attestation</button>
+      <button className="button form-footer" onClick={() => this.handleGenerate()}>Generate Attestation</button>
     </section>;
   }
 

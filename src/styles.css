@@ -11,12 +11,17 @@
 
 html,
 body {
-    font-family: sans-serif;
+    font-family: 'Varela Round', sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
     background-color: var(--bg);
     color: var(--color);
+    border-top: 2px solid var(--color);
+}
+
+.sub-title {
+    font-size: 1.2rem;
 }
 
 .container {
@@ -24,16 +29,13 @@ body {
     max-width: 320px;
 }
 
-.radio {
-    font-size: 1.5rem;
-    display: grid;
-    grid-template-columns: min-content auto;
-    grid-gap: 0.5em;
-    cursor: pointer;
+.radio-group.radio-group--stacked {
+    display: flex;
+    flex-direction: column;
 }
 
-.radio:not(:last-child){
-  margin-bottom: 1rem;
+.radio {
+    font-size: 1rem;
 }
 
 .radio input {
@@ -42,29 +44,27 @@ body {
     height: 0;
 }
 
-.radio__input {
-    display: flex;
+.radio-label {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: min-content auto;
 }
 
-input:checked + .radio__control {
+.radio-label:before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color);
+    border-radius: 50%;
+}
+
+input:checked + .radio-label:before {
     background: radial-gradient(currentcolor 50%, rgba(255, 0, 0, 0) 51%);
 }
 
-.radio__label {
-    line-height: 1;
-}
-
-.radio__control {
-    display: block;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    border: 0.1em solid currentColor;
-    transform: translateY(-0.05em);
-}
-
 .button {
-    font-size: 2rem;
+    font-size: 1.2rem;
     background-color: var(--color);
     color: var(--bg);
     padding: .5rem;
@@ -72,5 +72,19 @@ input:checked + .radio__control {
     border-radius: 6px;
     outline: 0;
     border: 0;
+}
+
+button:hover {
+    border-bottom: 3px solid #eee7ff;
+}
+
+.form-header {
+    padding: 1rem;
+    background-color: #eee7ff;
+}
+
+.form-footer {
+    margin-top: 1rem;
+    width: 100%;
 }
 
