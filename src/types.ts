@@ -11,4 +11,13 @@ export interface FormData {
   reason: LeaveReason
 }
 
-export type LeaveReason = "enfants" | "travail" | "achats" | "sante" | "famille" | "handicap" | "sportAnimaux" | "convocation" | "mission";
+export type LeaveReason =
+  "enfants"
+  | "travail"
+  | "achats"
+  | "sante"
+  | "famille"
+  | "handicap"
+  | "sportAnimaux"
+  | "convocation"
+  | "mission";

@@ -12,5 +12,5 @@ module.exports = Joi.object({
   zipcode: requiredString,
   date: requiredString,
   heuresortie: requiredString,
-  leaveReason: Joi.boolean().required()
+  leavereason: requiredString
 });

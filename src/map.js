@@ -19,7 +19,7 @@ function drawFence() {
     fillOpacity: 0.2,
     map,
     center: map.getCenter(),
-    radius: 500,
+    radius: 500
   });
 }
 
@@ -35,7 +35,7 @@ function getLocationUpdates() {
       {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0,
+        maximumAge: 0
       }
     );
   } else {
@@ -53,14 +53,14 @@ function toLatLng(position) {
 function drawMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: latLng,
-    zoom: 15,
+    zoom: 15
   });
 }
 
 function setCurrentPosition() {
   positionMarker = new google.maps.Marker({
     position: map.getCenter(),
-    map,
+    map
   });
 }
 

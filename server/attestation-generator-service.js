@@ -66,9 +66,9 @@ class AttestationGeneratorService extends EventEmitter {
       this.config.profileSelectors.heuresortie,
       formData.heuresortie
     );
-    await (
-      await this.page.$(this.config.reasonsSelectors[formData.leaveReason])
-    ).click();
+
+    const reasonCheckbox = await this.page.$(this.config.reasonsSelectors[formData.leavereason])
+    await reasonCheckbox.click();
     console.log("submit form");
     await (await this.page.$(this.config.submitSelector)).click();
     console.log("downloading...");
