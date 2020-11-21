@@ -54,7 +54,7 @@ class App extends Component<any, any> {
   private serializeForm(reason: LeaveReason, date: Date): AttestationFormData {
     return {
       ...this.state.user,
-      date: dateFormat(date, "dd/mm/yyyy"),
+      date: dateFormat(date, "mm/dd/yyyy"),
       heuresortie: dateFormat(date, "hh:MMTT"),
       leavereason: reason
     };
