@@ -4,7 +4,7 @@ import { apiUrl } from "../config";
 
 export class GenerateAttestationService {
   generate(formData: any) {
-    axios.post(apiUrl, formData, {
+    return axios.post(apiUrl, formData, {
       responseType: "blob"
     }).then((res: { data: string | Blob; }) => {
       const now = new Date();

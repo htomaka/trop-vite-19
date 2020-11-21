@@ -78,6 +78,10 @@ button:hover {
     border-bottom: 3px solid #eee7ff;
 }
 
+button:disabled {
+    opacity: .8;
+}
+
 .form-header {
     padding: 1rem;
     background-color: #eee7ff;

@@ -9,10 +9,12 @@ import { UserService } from "./user-service";
 import { RegisterUser } from "./registerUser/registerUser";
 
 interface AppState {
-  user: User
+  user: User,
+  attestationLoading: boolean,
+  setLoading: () => void
 }
 
-interface FormData extends User{
+interface FormData extends User {
   date: string,
   heuresortie: string,
   leavereason: LeaveReason
@@ -23,7 +25,9 @@ class App extends Component<any, any> {
   private userService = new UserService();
 
   state: AppState = {
-    user: this.userService.getUser()
+    user: this.userService.getUser(),
+    attestationLoading: false,
+    setLoading: this.setLoading
   };
 
   handleRegisterUser(user: User) {
@@ -33,7 +37,16 @@ class App extends Component<any, any> {
 
   handleGenerate(reason: LeaveReason) {
     const now = new Date();
-    this.generateService.generate(this.serializeForm(reason, now));
+    this.setLoading(true);
+    this.generateService.generate(this.serializeForm(reason, now))
+      .then(() => this.setLoading(false))
+      .catch(() => this.setLoading(false));
+  }
+
+  setLoading(isLoading: boolean) {
+    this.setState({
+      attestationLoading: isLoading
+    });
   }
 
   render() {
@@ -42,10 +55,11 @@ class App extends Component<any, any> {
         <h1 className="title">TropVite19</h1>
       </header>
       {this.state.user ? (
-        <GenerateAttestation leaveReasons={leaveReasons} onSubmit={this.handleGenerate.bind(this)} />
+        <GenerateAttestation leaveReasons={leaveReasons} onSubmit={this.handleGenerate.bind(this)} loading={this.state.attestationLoading} />
       ) : <RegisterUser onSubmit={this.handleRegisterUser.bind(this)} />}
 
-    </section>;
+    </section>
+      ;
   }
 
   private serializeForm(reason: LeaveReason, date: Date): FormData {
@@ -54,7 +68,7 @@ class App extends Component<any, any> {
       date: dateFormat(date, "dd/mm/yyyy"),
       heuresortie: dateFormat(date, "hh:MMTT"),
       leavereason: reason
-    }
+    };
   }
 }
 
