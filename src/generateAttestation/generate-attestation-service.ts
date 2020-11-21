@@ -1,6 +1,6 @@
 import * as FileSaver from "file-saver";
 import axios from "axios";
-import { apiUrl } from "./config";
+import { apiUrl } from "../config";
 
 export class GenerateAttestationService {
   generate(formData: any) {

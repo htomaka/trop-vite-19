@@ -1,6 +1,6 @@
 import { LeaveReason } from "../types";
 import { Component, h } from "preact";
-import { Radio } from "./radio";
+import { Radio } from "../components/radio";
 import { leaveReasonLabels } from "../config";
 
 

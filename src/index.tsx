@@ -1,12 +1,12 @@
 import { Component, h, render } from "preact";
-import { GenerateAttestationService } from "./generate-attestation-service";
+import { GenerateAttestationService } from "./generateAttestation/generate-attestation-service";
 import { LeaveReason } from "./types";
 import dateFormat from "dateformat";
-import { GenerateAttestation } from "./components/generateAttestation";
+import { GenerateAttestation } from "./generateAttestation/generateAttestation";
 import { leaveReasons } from "./config";
-import { User } from "./types/user";
+import { User } from "./registerUser/user";
 import { UserService } from "./user-service";
-import { RegisterUser } from "./components/registerUser";
+import { RegisterUser } from "./registerUser/registerUser";
 
 interface AppState {
   user: User

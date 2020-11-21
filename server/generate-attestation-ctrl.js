@@ -24,7 +24,7 @@ module.exports = {
             path.join(config.tmpFolder, files[files.length - 1])
           );
         }
-        await rmDir(config.tmpFolder, { recursive: true });
+        await rmDir(config.tmpFolder);
       });
       await service.exec(req.body);
     } catch (err) {

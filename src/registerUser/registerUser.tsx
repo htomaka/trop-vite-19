@@ -1,5 +1,5 @@
 import { Component, h } from "preact";
-import { User } from "../types/user";
+import { User } from "./user";
 
 export class RegisterUser extends Component<any, any> {
   state: User = {
