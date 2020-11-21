@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:ui": "npx parcel src/index.html",
     "build:ui": "rm -rf dist && npx parcel build src/index.html",
-    "deploy:ui": "npm run build:ui && cd dist && surge --project /home/hto/WebstormProjects/trop-vite-19/dist --domain http://annoying-faucet.surge.sh",
+    "deploy:ui": "NODE_ENV=production && npm run build:ui && cd dist && surge --project /home/hto/WebstormProjects/trop-vite-19/dist --domain http://annoying-faucet.surge.sh",
     "format": "npx prettier --write .",
     "start": "node server"
   },

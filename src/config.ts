@@ -1,7 +1,18 @@
 import { LeaveReason } from "./types";
 
-//export const apiUrl = "https://tranquil-cliffs-66769.herokuapp.com/generate";
-export const apiUrl = 'http://localhost:3000/generate';
+const getApiUrl = () => {
+  let apiUrl;
+
+  if (process.env.NODE_ENV === "production") {
+    apiUrl = "https://tranquil-cliffs-66769.herokuapp.com/generate";
+  } else {
+    apiUrl = "http://localhost:3000/generate";
+  }
+
+  return apiUrl;
+};
+
+export const apiUrl = getApiUrl();
 
 export const leaveReasonLabels: Record<LeaveReason, string> = {
   "enfants": "amener mon enfant à l'école",
