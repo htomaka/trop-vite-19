@@ -7,18 +7,8 @@ import { leaveReasons } from "./config";
 import { User } from "./registerUser/user";
 import { UserService } from "./user-service";
 import { RegisterUser } from "./registerUser/registerUser";
+import { AppState, AttestationFormData } from "./types/types";
 
-interface AppState {
-  user: User,
-  attestationLoading: boolean,
-  setLoading: () => void
-}
-
-interface FormData extends User {
-  date: string,
-  heuresortie: string,
-  leavereason: LeaveReason
-}
 
 class App extends Component<any, any> {
   private generateService = new GenerateAttestationService();
@@ -26,8 +16,7 @@ class App extends Component<any, any> {
 
   state: AppState = {
     user: this.userService.getUser(),
-    attestationLoading: false,
-    setLoading: this.setLoading
+    attestationLoading: false
   };
 
   handleRegisterUser(user: User) {
@@ -62,7 +51,7 @@ class App extends Component<any, any> {
       ;
   }
 
-  private serializeForm(reason: LeaveReason, date: Date): FormData {
+  private serializeForm(reason: LeaveReason, date: Date): AttestationFormData {
     return {
       ...this.state.user,
       date: dateFormat(date, "dd/mm/yyyy"),
