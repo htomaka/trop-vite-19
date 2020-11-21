@@ -19,7 +19,7 @@ async function rmDir(path) {
 
 async function mkDir(path) {
   try {
-    return fs.mkdir(path);
+    return fs.mkdir(path, {recursive: true});
   } catch (err) {
     console.error(err);
   }
