@@ -3,7 +3,8 @@ import { LeaveReason } from "../types";
 
 export interface AppState {
   user: User,
-  attestationLoading: boolean
+  attestationLoading: boolean,
+  pageTitle: string
 }
 
 export interface AttestationFormData extends User {

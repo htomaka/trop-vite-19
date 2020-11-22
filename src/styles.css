@@ -1,6 +1,8 @@
 :root {
     --bg: #f5f1ff;
     --color: #6e00d7;
+    --darker-bg: #eee7ff;
+    --lighter-bg: #f6f3ff;
 }
 
 *,
@@ -21,11 +23,15 @@ body {
 }
 
 .sub-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
+}
+
+.hint {
+    font-size: .8rem;
 }
 
 .container {
-    margin: 0 auto;
+    margin: 0 1rem;
     max-width: 320px;
 }
 
@@ -75,7 +81,7 @@ input:checked + .radio-label:before {
 }
 
 button:hover {
-    border-bottom: 3px solid #eee7ff;
+    border-bottom: 3px solid var(--darker-bg);
 }
 
 button:disabled {
@@ -84,11 +90,31 @@ button:disabled {
 
 .form-header {
     padding: 1rem;
-    background-color: #eee7ff;
+    background-color: var(--darker-bg);
+    margin: 0 -1rem;
 }
 
 .form-footer {
     margin-top: 1rem;
     width: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field input {
+    background-color: var(--lighter-bg);
+    border: 1px solid var(--color);
+    padding: 8px;
+    border-radius: 6px;
+    color: var(--color);
+    outline: none;
+}
+
+.field input:focus {
+    border-width: 2px;
+    background-color: var(--darker-bg);
 }
 

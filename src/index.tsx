@@ -16,8 +16,13 @@ class App extends Component<any, any> {
 
   state: AppState = {
     user: this.userService.getUser(),
-    attestationLoading: false
+    attestationLoading: false,
+    pageTitle: ""
   };
+
+  componentDidMount() {
+    this.setState({ pageTitle: this.state.user ? "Indiquez une raison de sortie" : "Entrez vos informations personnelles" });
+  }
 
   handleRegisterUser(user: User) {
     this.setState({ user });
@@ -38,13 +43,19 @@ class App extends Component<any, any> {
     });
   }
 
+  setPageTitle(title: string) {
+    this.setState({ title });
+  }
+
   render() {
     return <section class="container">
       <header className="form-header">
         <h1 className="title">TropVite19</h1>
+        <h2 className="sub-title">{this.state.pageTitle}</h2>
       </header>
       {this.state.user ? (
-        <GenerateAttestation leaveReasons={leaveReasons} onSubmit={this.handleGenerate.bind(this)} loading={this.state.attestationLoading} />
+        <GenerateAttestation leaveReasons={leaveReasons} onSubmit={this.handleGenerate.bind(this)}
+                             loading={this.state.attestationLoading} />
       ) : <RegisterUser onSubmit={this.handleRegisterUser.bind(this)} />}
 
     </section>

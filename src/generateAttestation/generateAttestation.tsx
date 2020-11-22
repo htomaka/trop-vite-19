@@ -20,7 +20,6 @@ export class GenerateAttestation extends Component<any, any> {
 
   render(props: { leaveReasons: LeaveReason[], onSubmit: () => void, loading: boolean }) {
     return <form className="radio-group radio-group--stacked">
-      <h2 className="sub-title">Indiquez une raison de sortie</h2>
       {props.leaveReasons.map((value) => {
         return <Radio value={value} name="leavereason"
                       onChange={() => this.handleSelect(value)}>{leaveReasonLabels[value]}</Radio>;

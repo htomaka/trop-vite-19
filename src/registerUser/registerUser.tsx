@@ -39,9 +39,13 @@ export class RegisterUser extends Component<any, any> {
     this.setState({ city: event.target.value });
   }
 
+  validateForm(){
+    return Object.keys(this.state).every((field: keyof User) => !!this.state[field]);
+  }
+
   render() {
     return <form>
-      <h2 className="sub-title">Entrez vos infos personnelles</h2>
+      <p class="hint">Tous les champs sont obligatoires</p>
       <div className="field">
         <label htmlFor="firstname">Prénom</label>
         <input type="text" id="firstname" onInput={this.handleFirstName.bind(this)} required={true} />
@@ -71,7 +75,7 @@ export class RegisterUser extends Component<any, any> {
         <input type="text" id="city" onInput={this.handleCity.bind(this)} required={true} />
       </div>
 
-      <button className="button form-footer" onClick={() => this.handleSubmit()}>Enregistrer</button>
+      <button className="button form-footer" disabled={!this.validateForm()} onClick={() => this.handleSubmit()}>Enregistrer</button>
     </form>;
   }
 }
