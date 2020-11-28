@@ -1,4 +1,4 @@
-import { User } from "../registerUser/user";
+import { User } from "./user";
 import { LeaveReason } from "../types";
 
 export interface AppState {
@@ -7,7 +7,14 @@ export interface AppState {
   pageTitle: string
 }
 
-export interface AttestationFormData extends User {
+export interface AttestationFormData {
+  firstname: string,
+  lastname: string,
+  birthday: string,
+  placeofbirth: string,
+  address: string,
+  zipcode: string,
+  city: string,
   date: string,
   heuresortie: string,
   leavereason: LeaveReason

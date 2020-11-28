@@ -12,7 +12,12 @@ const getApiUrl = () => {
   return apiUrl;
 };
 
+const getGeocodingApiUrl = () => {
+  return `https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.GOOGLE_API_KEY}`;
+}
+
 export const apiUrl = getApiUrl();
+export const geocodingApiUrl = getGeocodingApiUrl();
 
 export const leaveReasonLabels: Record<LeaveReason, string> = {
   "enfants": "amener mon enfant à l'école",

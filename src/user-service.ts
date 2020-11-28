@@ -1,4 +1,4 @@
-import { User } from "./registerUser/user";
+import { User } from "./types/user";
 
 export class UserService {
   getUser(): User {

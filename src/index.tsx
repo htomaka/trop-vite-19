@@ -4,14 +4,15 @@ import { LeaveReason } from "./types";
 import dateFormat from "dateformat";
 import { GenerateAttestation } from "./generateAttestation/generateAttestation";
 import { leaveReasons } from "./config";
-import { User } from "./registerUser/user";
+import { User } from "./types/user";
 import { UserService } from "./user-service";
 import { RegisterUser } from "./registerUser/registerUser";
 import { AppState, AttestationFormData } from "./types/types";
-
+import { GeocodingService } from "./geocoding/geocoding-service";
 
 class App extends Component<any, any> {
   private generateService = new GenerateAttestationService();
+  private geocodingService = new GeocodingService();
   private userService = new UserService();
 
   state: AppState = {
@@ -26,7 +27,9 @@ class App extends Component<any, any> {
 
   handleRegisterUser(user: User) {
     this.setState({ user });
-    this.userService.saveUser(user);
+    this.geocodingService.getLocation(user.address).then(location => {
+      this.userService.saveUser({ ...user, address: { ...user.address, location } });
+    });
   }
 
   handleGenerate(reason: LeaveReason) {
@@ -64,7 +67,13 @@ class App extends Component<any, any> {
 
   private serializeForm(reason: LeaveReason, date: Date): AttestationFormData {
     return {
-      ...this.state.user,
+      birthday: this.state.user.birthday,
+      firstname: this.state.user.firstname,
+      lastname: this.state.user.lastname,
+      placeofbirth: this.state.user.placeofbirth,
+      address: this.state.user.address.street,
+      city: this.state.user.address.city,
+      zipcode: this.state.user.address.zipcode,
       date: dateFormat(date, "mm/dd/yyyy"),
       heuresortie: dateFormat(date, "hh:MMTT"),
       leavereason: reason

@@ -1,9 +1,13 @@
 import { Component, h } from "preact";
-import { User } from "./user";
+import { User } from "../types/user";
 
 export class RegisterUser extends Component<any, any> {
   state: User = {
-    address: "", birthday: "", city: "", firstname: "", lastname: "", placeofbirth: "", zipcode: ""
+    address: {
+      street: "",
+      zipcode: "",
+      city: "",
+    }, birthday: "",  firstname: "", lastname: "", placeofbirth: "",
 
   };
 
@@ -28,15 +32,15 @@ export class RegisterUser extends Component<any, any> {
   }
 
   handleAddress(event: any) {
-    this.setState({ address: event.target.value });
+    this.setState({ address: {...this.state.address, street: event.target.value} });
   }
 
   handleZipcode(event: any) {
-    this.setState({ zipcode: event.target.value });
+    this.setState({ address: {...this.state.address, zipcode: event.target.value} });
   }
 
   handleCity(event: any) {
-    this.setState({ city: event.target.value });
+    this.setState({ address: {...this.state.address, city: event.target.value} });
   }
 
   validateForm(){

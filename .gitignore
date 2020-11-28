@@ -5,3 +5,4 @@
 .cache
 /server/tmp/*.pdf
 example.png
+.env
