@@ -9,4 +9,4 @@ As a lazy person, I want to download an _attestation de sortie_ with my personal
 ## Requirements
 - I should be able to save my personal infos
 - I should be able to use the app from my mobile device
-- When I go out for a walk, I want to be notified if I cross the authorized 1km boundary around my home.
+- When I go out for a walk, I want to be notified if I cross the authorized (n)km boundary around my home.
