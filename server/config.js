@@ -15,7 +15,7 @@ const profileSelectors = {
 const reasonsSelectors = {
   enfants: "#checkbox-enfants",
   travail: "#checkbox-travail",
-  achats: "#checkbox-achats",
+  achats: "#checkbox-achats_culturel_cultuel",
   sante: "#checkbox-sante",
   famille: "#checkbox-famille",
   handicap: "#checkbox-handicap",
